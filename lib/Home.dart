@@ -4,6 +4,8 @@ import 'package:flutter_youtube/telas/EmAlta.dart';
 import 'package:flutter_youtube/telas/Inicio.dart';
 import 'package:flutter_youtube/telas/Inscricao.dart';
 
+import 'CustomSearchDelegate.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -32,18 +34,22 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         title: Image.asset(
           "images/youtube.png",
+          width: 750,
+          height: 125,
+          alignment: Alignment.bottomLeft,
         ),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              String? res = await showSearch(context: context, delegate: CustomSearchDelegate());
+            },
+          ),
+          /*
           IconButton(
             icon: Icon(Icons.videocam),
             onPressed: (){
               print("acao: videocam");
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: (){
-              print("acao: pesquisa");
             },
           ),
           IconButton(
@@ -52,6 +58,9 @@ class _HomeState extends State<Home> {
               print("acao: conta");
             },
           )
+           */
+
+
         ],
       ),
       body: Container(
