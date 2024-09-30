@@ -15,12 +15,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int _indiceAtual = 0;
+  String _resultado = "";
 
   @override
   Widget build(BuildContext context) {
 
     List<Widget> telas = [
-      Inicio(),
+      Inicio( _resultado ),
       EmAlta(),
       Inscricao(),
       Biblioteca()
@@ -28,8 +29,8 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-            color: Colors.grey
+        iconTheme: IconThemeData(
+          color: Colors.grey
         ),
         backgroundColor: Colors.white,
         title: Image.asset(
@@ -43,8 +44,13 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.search),
             onPressed: () async {
               String? res = await showSearch(context: context, delegate: CustomSearchDelegate());
+              setState(() {
+                _resultado = res!;
+              });
+              print("resultado: digitado ${res!}" );
             },
           ),
+
           /*
           IconButton(
             icon: Icon(Icons.videocam),
@@ -52,13 +58,14 @@ class _HomeState extends State<Home> {
               print("acao: videocam");
             },
           ),
+
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: (){
               print("acao: conta");
             },
           )
-           */
+          */
 
 
         ],
@@ -68,15 +75,15 @@ class _HomeState extends State<Home> {
         child: telas[_indiceAtual],
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _indiceAtual,
-          onTap: (indice){
-            setState(() {
-              _indiceAtual = indice;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.red,
-          items: const [
+        currentIndex: _indiceAtual,
+        onTap: (indice){
+          setState(() {
+            _indiceAtual = indice;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Colors.red,
+          items: [
             BottomNavigationBarItem(
               //backgroundColor: Colors.orange,
                 label: "Início",
